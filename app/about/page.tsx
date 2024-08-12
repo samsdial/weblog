@@ -2,6 +2,11 @@ import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { siteConfig } from "@/config/site";
 import { AvatarFallback } from "@radix-ui/react-avatar";
 
+export const metadata: Metadata = {
+    title: "About Me",
+    description: "Information about me",
+  };
+
 export default async function AboutPage() {
     return (
         <div className="container max-w-6xl py-6 lg:py-10">
