@@ -1,6 +1,7 @@
 import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import { siteConfig } from "@/config/site";
 import { AvatarFallback } from "@radix-ui/react-avatar";
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
     title: "About Me",
