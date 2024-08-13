@@ -1,0 +1,210 @@
+---
+title: JavaScript {ES6} Features
+description: This is features JS
+date: 2024-08-12
+published: true
+---
+
+### Arrow Functions
+
+```js {7} showLineNumbers
+// ES5 Function
+function addition(a, b){
+    return a + b;
+}
+
+// ES6 Function
+const addition = (a, b) => a + b;
+
+```
+### Explanation
+<Callout type="warning">
+    Arrow functions provide a concise syntax for writing funtions, especially useful for short, one-line opertions
+</Callout>
+
+----------------------------------------------------------------
+
+### Template Literals
+
+```js {2} showLineNumbers
+const name = 'Jhon';
+const greeting = `Hello, ${name}`;
+
+console.log(greeting);
+// Result: Hello, Jhon!
+
+```
+### Explanation
+<Callout type="warning">
+    Template Literals Allow embedding expressions inside string, providing a cleaner and more readable way to concatenate string.
+</Callout>
+
+----------------------------------------------------------------
+
+### Destructuring Assignment
+
+```js {5} showLineNumbers
+const person = { name: 'John', age: 25 };
+// extracting properties
+const { name, age } = person;
+
+console.log("Name:", name, "Age:", age);
+// Result: Name, Jhon Age: 25
+
+```
+### Explanation
+<Callout type="warning">
+    Destructuring assignment simplified the extraction of values from objects or arrays into individual variables.
+</Callout>
+
+----------------------------------------------------------------
+
+### Spread Operator
+
+```js {2} showLineNumbers
+const numbers = [1, 2, 3];
+const newNumbers = [...numbers, 4, 5];
+
+console.log('newNumbers:', newNumbers);
+// Result: newNumbers: [1,2,3,4,5]!
+
+```
+### Explanation
+<Callout type="warning">
+    The spread operator allows for the expasion of elements, making it handy for creating new arrays or objects based on existing ones.
+</Callout>
+
+----------------------------------------------------------------
+
+### Rest Parameter
+
+```js {7} showLineNumbers
+const sum = (...numbers) => {
+    return numbers.reduce((acc, num) =>{
+        return acc + num;
+    }, 0);
+}
+
+console.log(sum(1,2,3));
+// Result: 6
+
+```
+### Explanation
+<Callout type="warning">
+    The rest paramater allows functions to accept an indefinite number of arguments as an array, simplifing parameter handing.
+</Callout>
+
+----------------------------------------------------------------
+
+### Async / Await
+
+```js {2} showLineNumbers
+const API = 'https://api.example.com';
+const fetchData = async () => {
+    try {
+        const result = await fetch(`${API}/data`);
+        const data = await result.json();
+        console.log(data);
+    } catch (error){
+        console.error(error);
+    }
+}
+
+```
+### Explanation
+<Callout type="warning">
+    Async/await it a syntax for handling asynchronous code more concisely, providing a cleaner alternative to working with Promises.
+</Callout>
+
+----------------------------------------------------------------
+
+### Map & Set
+
+```js {2} showLineNumbers
+//Creating a Map with a key-value pair
+const numberMap = new Map().set('One', 1);
+
+// creating a set with unique numbers
+const unique = new Set([1,2,3,2,1])
+
+unique.forEach(number => console.log(number))
+// Output: 1
+// Output: 2
+// Output: 3
+```
+### Explanation
+<Callout type="warning">
+    Map an set are new data strucures introduced in ES6, Map is an ordered collection of key-value pairs, asn ser is a collection of unique values.
+</Callout>
+
+----------------------------------------------------------------
+
+### Default Parameters
+
+```js {2} showLineNumbers
+const greet = (name = 'Guest') => {
+    return `hello, ${name}!`
+};
+console.log(greet);
+// Output: Hello, Guest!
+
+console.log(greet('John'));
+// Result: Hello, Jhon!
+
+```
+### Explanation
+<Callout type="warning">
+    Default parameters provide calues dor finciton parameters if none are provided, improving flexibility and reducing the need for explicit checks.
+</Callout>
+
+----------------------------------------------------------------
+
+### Modules
+
+```js {2} showLineNumbers
+// Exporting module
+export const myFunction = () => {...};
+
+// Importing module
+import { myFunction } from './myModule';
+
+```
+### Explanation
+<Callout type="warning">
+    ES6 modules provide a clean and organized way to structure and import/export code, improving maintainability and reusability.
+</Callout>
+
+----------------------------------------------------------------
+
+### Map Methode
+
+```js {2} showLineNumbers
+const numbers = [1,2,3,4,5];
+const doubled = numbers.map(num => num * 2);
+
+console.log(doubled);
+// Result: [2, 4,6, 8, 10]
+
+```
+### Explanation
+<Callout type="warning">
+    The map method in JavaScript us used to create a new array by apply a provide funtion to echa element of an existing array.
+</Callout>
+
+----------------------------------------------------------------
+
+### Filter Methode
+
+```js {2} showLineNumbers
+const numbers = [1,2,3,4,5];
+const evens = numbers.filter(num => num % 2 === 0);
+
+console.log(evens);
+// Result: [2, 4,]
+
+```
+
+### Explanation
+<Callout type="warning">
+    The filter method is use to create a new array containing only the elememts that satify a specified condition.
+</Callout>
