@@ -1,5 +1,5 @@
 import { cn, formatDate } from "@/lib/utils";
-import { Calendar } from "lucide-react";
+import { Calendar, MoveRight } from "lucide-react";
 import Link from "next/link";
 import { buttonVariants } from "./ui/button";
 
@@ -29,7 +29,7 @@ export function PostItem({ slug, title, description, date}: PostItemProps) {
                     </dd>
                 </dl>
                 <Link href={slug} className={cn(buttonVariants({ variant: "link" }), "py-0")}>
-                    Read more -> 
+                    Read more <MoveRight />
                 </Link>
             </div>
         </article>
