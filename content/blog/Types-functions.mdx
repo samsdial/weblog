@@ -1,0 +1,135 @@
+---
+title: Types of functions in JavaScript
+description: Think on a function as a secret garden where your variables can flourish. 
+date: 2024-08-13
+published: true
+---
+
+## 1. Named funtions
+
+- These are functions declared with a *specifed name*. They can be called anywhere in your code, even before the declaration.
+
+```js {2} showLineNumbers
+function greet(name){
+    return "Hello" + name + "!";
+}
+
+console.log(greet("Zeeshan"));
+// Output: Hello, Zeeshan!
+
+```
+
+----------------------------------------------------------------
+
+## 2. Anonymous Functions
+- These are functions *without a name*. They are often used as arguments to other functions or assigned to variables.
+
+```js {1} showLineNumbers
+var greet = function(name){
+    return "Hello" + name + "!";
+}
+
+console.log(greet("Zeeshan"));
+// Output: Hello, Zeeshan!
+
+```
+
+----------------------------------------------------------------
+
+### 3. Arrow Funtions (ES6+)
+
+- A *concise way to write functions* in Js, especially useful for inline and short functions. They also provide lexical scoping of this.
+
+```js {1} showLineNumbers
+var greet = function(name) => {
+    return "Hello" + name + "!";
+}
+
+console.log(greet("Zeeshan Ali"));
+// Output: Hello, Zeeshan Ali!
+
+```
+
+----------------------------------------------------------------
+
+### 4. Constructor Functions
+
+- Functions used to *create objects*.
+- They are typically invoked with the *new keyword.*
+
+
+```js {2} showLineNumbers
+function Person(name){
+    this.name = name;
+}
+
+var person = new Person("Zeeshan")
+console.log(person.name);
+// Output: Zeeshan
+
+```
+
+----------------------------------------------------------------
+
+### 5. Generator Funtions (ES6+):
+
+- Funtions that can be *paused and resumed.*
+- They are *declared using an asterisk (*)* after the function keyword.
+
+```js {7} showLineNumbers
+function* generatorFunction() {
+    yield "a";
+    yield "b";
+    yield "c";
+}
+
+var gen = generatorFunction();
+console.log(gen.next().value);// Result: a
+console.log(gen.next().value);// Result: b
+
+```
+
+----------------------------------------------------------------
+
+### 6. Higher-Order Functions:
+
+- Functions that take other functions as *argunments or retun functions*.
+
+```js {2} showLineNumbers
+function greet(name){
+    return "Hello" + name + "!";
+}
+
+function sayHello(callback){
+    console.log(callback("Buddty"));
+}
+
+sayHello(greet);
+// Result: Hello, Buddy!
+
+```
+
+
+----------------------------------------------------------------
+
+### 7. Immediately invoke functions expressions (IIFE):
+
+- Functions that are *execute immeduately* after they are defined.
+
+```js {2} showLineNumbers
+(function(){
+    var message = "This is an IIFE"
+    console.log(message);
+})
+// Output: this is a IIFE
+```
+
+----------------------------------------------------------------
+
+### Based for
+<Callout type="warning">
+    Zeeshan Ali
+    _Frontend Engineer_
+    
+    [This original published](https://www.linkedin.com/posts/saurabhbatav_understanding-function-scope-in-javascript-activity-7229101977706631169-ZAKZ?utm_source=share&utm_medium=member_desktop)
+</Callout>
