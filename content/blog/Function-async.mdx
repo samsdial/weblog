@@ -1,0 +1,434 @@
+---
+title: Async and Await in JavaScript
+description: Explore how asynchronous functions work in JavaScript, their importance in handling non-blocking operations, and how to effectively use them to write cleaner, more efficient code.
+date: 2024-08-21
+published: true
+---
+
+### Introducction to Async and Await
+
+- in the word of JS, asynchronos programming is a key concept for performing tasks that take some time to complete, like fetching data from an API or reading a file from the disk. It helps us avoid blocking the main thread keeping our applications snappy and responsive. Two keywords that are central to asynchronous programming in JavaScript are `async`and `await`. We are going to expore async await JavaScript in detail here.
+
+## The `async` keywords
+- The `async` keywords is used to declare a function as asynchronous. It tells JavaScript that the function will handle asynchronous. It tells Javascript that the function will handle asynchronous operations, and that the function will handle asynchronous operations, and it will return a promise, which is an object representing the eventual completion (or failure) of an asynchronos operation.
+- Here's how you can define an async function:
+
+```js {2} showLineNumbers
+async function fetchData(){
+    // Function body here
+}
+```
+
+## The `await` keywords
+- The `await` keyword is used inside an async function to pause the execution of the function until a promise us resolved. In simpler terms, it waits for the result of an asynchronous operation.
+- For Example, if we want to fect data from an API, we can `await` the fetch call like this:
+
+```js {2} showLineNumbers
+async function fetchData(){
+    const response = await fecht('https//api.example.com/data');
+    const data = await response.json();
+    return data
+}
+
+```
+
+## Error Handling
+- Whe using `await`, if the promuse is rejected (meaning the asynchronous operation failed), it throws an exception. To handle these exception, we wrap our `await` calls in a try-catch block:
+
+```js {2} showLineNumbers
+async function fetchData(){
+    try{
+        const response = await fecht('https//api.example.com/data');
+        const data = await response.json();
+        return data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+}
+```
+
+## Why Use Async/Await
+
+- (ENG)
+- `Async/Await` makes asynchronous code look and behave a little more like asynchronous code. This makes it easier to understand and maintain. It also cleans up the code, avoiding the "callback hell" or "Pryramid of Doom" scenario which can happen wit comples nested callbacks.
+----------------------------------------------------------------
+-(ESP)
+- `Async/Await` hace que el código asíncrono parezca y se comporte un poco más como código asíncrono. Esto hace que sea más fácil de entender y mantener. También limpia el código, evitando el «callback hell» o «Pryramid of Doom» que puede ocurrir con múltiples callbacks anidados.
+
+
+## Practical Examples of Async and Await
+
+- (ENG)
+- Let's dive into some practical examples of using `async` and `await` in JavaScript. These examples will help you understand how to apply thise keyword for various common tasks such as fetching data from an API performing file operations, and executing database queries.
+----------------------------------------------------------------
+-(ESP)
+- Veamos algunos ejemplos prácticos del uso de `async` y `await` en JavaScript. Estos ejemplos le ayudarán a entender cómo aplicar esta palabra clave para diversas tareas comunes, tales como la obtención de datos de una API de realizar operaciones de archivo, y la ejecución de consultas a bases de datos.
+
+## fetching Data from an API
+
+- (ENG)
+- Fetchind Data from an API is a common operation that benefits freaty from `async` and `await`. Here's how you can use them to make an API call:
+----------------------------------------------------------------
+- (ESP)
+- Obtener datos de una API es una operación común que se beneficia mucho de `async` y `await`. A continuación te explicamos cómo utilizarlos para realizar una llamada a la API:
+```js {2} showLineNumbers
+async function getDataFromApi(url){
+    try{
+        const response = await fecht(url);
+        if (!response.ok){
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+        console.log(data);
+        return data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+}
+getDataFromApi('https://api.example.com/data');
+```
+
+
+## File operations
+
+- (ENG)
+- File operations in Node.js can be handled asynchronous with the fs module, which can be promisified to use with `async` and `await`.
+----------------------------------------------------------------
+- (ESP)
+- Las operaciones con archivos en Node.js se pueden manejar de forma asíncrona con el módulo fs, que se puede prometer usar con `async` y `await`.
+
+```js {2} showLineNumbers
+const fs = require('fs').promises;
+async function readFile(filePath){
+    try{
+        const data = await ds.readFile(filePath, 'utf8');
+        console.log(data);
+        return data;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    }
+}
+// Usage
+readFile('path/to/your/file.txt')
+```
+
+## Database Queries
+- (ENG)
+- Database operations are another place where `async` and `await` shine. When using a database library that supports Promises, you can await the result of a query like so:
+----------------------------------------------------------------
+- (ESP)
+- Las operaciones de base de datos son otro lugar donde `async` y `await` brillan. Cuando se utiliza una biblioteca de base de datos que soporta Promises, se puede esperar el resultado de una consulta de esta manera:
+
+```js {4} showLineNumbers
+async function queryDatabase(query) {
+    try{
+        const db = require('your-db-client');
+        await db.connect(query);
+        const result = await db.query(query);
+        console.log(result);
+        return result;
+    } catch (error) {
+        console.error('Error fetching data:', error);
+    } finally {
+        db.end(); // Make sure to close the database connection
+    }
+}
+// Usage
+queryDatabase('Select * FROM your_table');
+```
+- (ENG)
+- Replace 'your-db-client' whit the actual database client libray you are using, and make sure your query is safe from SQL injection attacks.
+----------------------------------------------------------------
+- (ESP)
+- Sustituya 'your-db-client' por la librería cliente de base de datos que esté utilizando, y asegúrese de que su consulta está a salvo de ataques de inyección SQL.
+
+
+## Erro Handling in Async/Await
+
+- (ENG)
+- Error Handling is a crucial part of working with async and await in Javascript. It ensures that your applications can gracefully handle and recover from unexpected situations. Let's look at how to implement error handling using try/catch blocks and manage multiple await calls.
+----------------------------------------------------------------
+- (ESP)
+- El manejo de errores es una parte crucial del trabajo con async y await en Javascript. Asegura que tus aplicaciones puedan manejar con gracia y recuperarse de situaciones inesperadas. Veamos cómo implementar la gestión de errores utilizando bloques try/catch y gestionar múltiples llamadas await.
+
+### Using Try/Catch Block
+- (ENG)
+- When using async/await, you can handle errors synchronously using try/catch blocks. This is similar to error handling in synchrinous code.
+----------------------------------------------------------------
+- (ESP)
+- Cuando se utiliza async/await, se pueden manejar los errores de forma sincrónica utilizando bloques try/catch. Esto es similar a la gestión de errores en código sincrónico.
+```js {2} showLineNumbers
+async function fetchData(){
+    try{
+        const response = await fecht('https//api.example.com/data');
+        const data = await response.json();
+        return data; // Process data
+    } catch (error) {
+        // Handle errors that occur during the fetch or data processing;
+        console.error('Error fetching data:', error);
+    }
+}
+```
+
+## Handling Multiple Await Calls
+- (ENG)
+- When you have multiple await calls that are independent of each other, you can use `Promise.all` to run them concurrently. This is more efficient than awaiting each operation sequentially.
+----------------------------------------------------------------
+- (ESP)
+- Cuando tienes varias llamadas await que son independientes entre sí, puedes utilizar `Promise.all` para ejecutarlas simultáneamente. Esto es más eficiente que esperar cada operación secuencialmente.
+```js {2} showLineNumbers
+async function fetchMultipleUrls(urls) {
+    try{
+        const requests = urls.map(url => fetch(url).then(res => res.json()));
+        const results = await Promise.all(requests);
+        return results; // An array of results from each URL
+    } catch (error) {
+        // IF any request fails, the catch block is exclude
+        console.error('Error fetching data:', error);
+    }
+}
+
+// Usage
+fetchMultipleUrls([
+    'https://api.example.com/data1',
+    'https://api.example.com/data2',
+    'https://api.example.com/data3',
+]);
+```
+- (ENG)
+- In the example above, `Promise.all` takes an array of promises and waits for all of them to be resolved. If any on the primises are rejected, the catch block will catch the error. This approach can significantly reduce the total time spent waiting for all operations to complete.
+- Remember, error handling with async/await allows you to write asynchronous code that is both powerful and easy to read. It's a game-changer for JavaScript developers!
+----------------------------------------------------------------
+- (ESP)
+- En el ejemplo anterior, `Promise.all` toma un array de promesas y espera a que todas ellas se resuelvan. Si alguna de las primicias es rechazada, el bloque catch detectará el error. Este enfoque puede reducir significativamente el tiempo total empleado en esperar a que se completen todas las operaciones.
+- Recuerda, el manejo de errores con async/await te permite escribir código asíncrono que es a la vez potente y fácil de leer. Es un cambio de juego para los desarrolladores de JavaScript.
+
+
+## Async/Await with looping Constructs
+- (ENG)
+- Using async/await within loops can be powerful feature, but it's important to understand how to do it correctly to avoid common pitfalls.
+- When you need to perform async operations within a loop, you might be tempted to just throw `await` in front of an asynchronous call, but this can lead to unexpected behavior, especially if you're not careful with how careful with how the loop executes. Here's an example with a `for` loop:
+----------------------------------------------------------------
+- (ESP)
+- El uso de async/await dentro de bucles puede ser una función muy potente, pero es importante entender cómo hacerlo correctamente para evitar errores comunes.
+- Cuando necesites realizar operaciones asíncronas dentro de un bucle, puedes tener la tentación de simplemente lanzar `await` delante de una llamada asíncrona, pero esto puede llevar a un comportamiento inesperado, especialmente si no tienes cuidado con cómo se ejecuta el bucle. Aquí tienes un ejemplo con un bucle `for`:
+```js {2} showLineNumbers
+async function processArray(array) {
+    for (let item of array) {
+        await processItem(item); // Assume processItem returns a promise
+    }
+}
+```
+- (ENG)
+- In the example above, `processItem` is awaited for each item of the array one after the other. which means the operations are performed sequentially.
+- If the order of execution is not important and you want to perform operations in parallel, you can use `Promise.all` as follows:
+----------------------------------------------------------------
+- (ESP)
+- En el ejemplo anterior, `processItem` se espera para cada elemento del array uno tras otro. lo que significa que las operaciones se realizan secuencialmente.
+- Si el orden de ejecución no es importante y desea realizar las operaciones en paralelo, puede utilizar `Promise.all` de la siguiente manera:
+
+```js {2} showLineNumbers
+async function processArray(array) {
+    await Promise.all(array.map(item => processItem(item))); // Assume processItem returns a promise
+}
+```
+#### Common Pitfalls
+- **Accidental Squential Excution**: Uing `await` inside a loop like `for...of` will cause your program to wait for each asynchronous operation to complete before continuing ti the next iteration.This is often not the intended behavior, especially when the operations are independent of each other.
+- **Resource Exhaustion**: Whe you use `Promise.all` to run many operations concurrently, you might run into systems limits(like open file handles or database connections). In such cases, you should batch your operations or use libraries that can limint concurrency.
+- **Error Handling**: If you use `Promise.all` and one promise rejects, all other results are discarded, add the catch block is Immediately invoked. You need to ensure proper error handling for each individual operation if you need to retain results from successful operations.
+- **Ignoring Return Values**: 
+
+## Comparing Callbacks, Promoses, and Async/Await
+- (ENG)
+-
+----------------------------------------------------------------
+- (ESP)
+-
+
+## From Callbacks to Promises to Async/Await
+- (ENG)
+-
+----------------------------------------------------------------
+- (ESP)
+-
+
+## Async/Await with in Parallel execution
+
+- (ENG)
+-
+----------------------------------------------------------------
+- (ESP)
+-
+
+## Testing Async/Await Functions
+
+- (ENG)
+-
+----------------------------------------------------------------
+- (ESP)
+-
+
+
+## Advanced Async/Await Patterns
+- (ENG)
+-
+----------------------------------------------------------------
+- (ESP)
+-
+
+## Async/Await in front-end Development
+- (ENG)
+-
+----------------------------------------------------------------
+- (ESP)
+-
+
+## Async/Await in node.js
+- (ENG)
+-
+----------------------------------------------------------------
+- (ESP)
+-
+
+## Wrap up
+
+- (ENG)
+-
+----------------------------------------------------------------
+- (ESP)
+-
+
+## Promesas encadenadas
+- El método .then() toma hasta dos argumentos: el primer argumento es una funcion de devolucion de llamada (callback) para el caso resuelto de la promesa, y el segundo ...
+
+
+##  Try...catch
+- La declaracion try...catch señala un bloque de instrucciones a intentar (try) y especifica ...
+
+## 1. Named functions
+- These are functions declared with a *specifed name*. They can be called anywhere in your code, even before the declaration.
+
+```js {2} showLineNumbers
+function greet(name){
+    return "Hello" + name + "!";
+}
+
+console.log(greet("Zeeshan"));
+// Output: Hello, Zeeshan!
+
+```
+
+----------------------------------------------------------------
+
+## 2. Anonymous Functions
+- These are functions *without a name*. They are often used as arguments to other functions or assigned to variables.
+
+```js {1} showLineNumbers
+var greet = function(name){
+    return "Hello" + name + "!";
+}
+
+console.log(greet("Zeeshan"));
+// Output: Hello, Zeeshan!
+
+```
+
+----------------------------------------------------------------
+
+### 3. Arrow Functions (ES6+)
+
+- A *concise way to write functions* in Js, especially useful for inline and short functions. They also provide lexical scoping of this.
+
+```js {1} showLineNumbers
+var greet = function(name) => {
+    return "Hello" + name + "!";
+}
+
+console.log(greet("Zeeshan Ali"));
+// Output: Hello, Zeeshan Ali!
+
+```
+
+----------------------------------------------------------------
+
+### 4. Constructor Functions
+
+- Functions used to *create objects*.
+- They are typically invoked with the *new keyword.*
+
+
+```js {2} showLineNumbers
+function Person(name){
+    this.name = name;
+}
+
+var person = new Person("Zeeshan")
+console.log(person.name);
+// Output: Zeeshan
+
+```
+
+----------------------------------------------------------------
+
+### 5. Generator Functions (ES6+):
+
+- Functions that can be *paused and resumed.*
+- They are *declared using an asterisk (*)* after the function keyword.
+
+```js {7} showLineNumbers
+function* generatorFunction() {
+    yield "a";
+    yield "b";
+    yield "c";
+}
+
+var gen = generatorFunction();
+console.log(gen.next().value);// Result: a
+console.log(gen.next().value);// Result: b
+
+```
+
+----------------------------------------------------------------
+
+### 6. Higher-Order Functions:
+
+- Functions that take other functions as *argunments or retun functions*.
+
+```js {2} showLineNumbers
+function greet(name){
+    return "Hello" + name + "!";
+}
+
+function sayHello(callback){
+    console.log(callback("Buddty"));
+}
+
+sayHello(greet);
+// Result: Hello, Buddy!
+
+```
+
+
+----------------------------------------------------------------
+
+### 7. Immediately invoke functions expressions (IIFE):
+
+- Functions that are *execute immeduately* after they are defined.
+
+```js {2} showLineNumbers
+(function(){
+    var message = "This is an IIFE"
+    console.log(message);
+})
+// Output: this is a IIFE
+```
+
+----------------------------------------------------------------
+
+### Based for
+<Callout type="warning">
+    Zeeshan Ali
+    _Frontend Engineer_
+    
+    [This original published](https://www.linkedin.com/posts/saurabhbatav_understanding-function-scope-in-javascript-activity-7229101977706631169-ZAKZ?utm_source=share&utm_medium=member_desktop)
+</Callout>
