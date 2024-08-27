@@ -1,0 +1,117 @@
+---
+title: Vue initial tutorial
+description: Explore de initial tutorial vue
+date: 2024-08-26
+published: true
+---
+
+## First part
+
+```js {7} showLineNumbers
+<script setup>
+const name = 'Dinamic See';
+const arrayFrutas = [
+  {
+    id: 1,
+    name: 'apple',
+    price: '$1000',
+    description: 'One apple',
+    stock: 0,
+  },
+  {
+    id: 2,
+    name: 'pinapple',
+    price: '$1080',
+    description: 'One pinapple',
+    stock: 10,
+  },
+  {
+    id: 3,
+    name: 'orange',
+    price: '$600',
+    description: 'One orange',
+    stock: 20,
+  },
+];
+function capitalize(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1)
+}
+</script>
+
+<template>
+  <h1>Hi, {{ name.toUpperCase() }}</h1>
+  <ul>
+    <template v-for="(frutas, index) of arrayFrutas" :key="index + frutas.id">
+      <li v-if="frutas.stock > 0">
+        <div v-for="(value, propiedad, index) in frutas" :key="index">
+          {{ index+1 }} - {{ capitalize(propiedad) }}: {{ value }}
+        </div>
+      </li>
+    </template>
+  </ul>
+</template>
+
+<style scoped>
+ul {
+  text-align: left;
+}
+</style>
+
+
+```
+## Second part of
+
+```js {2} showLineNumbers
+<script setup>
+import { ref, computed } from 'vue';
+const name = 'Dinamic See';
+
+const counter = ref(0);
+const arrayFavorite = ref([]);
+
+const increment = () => counter.value++;
+const decrement = () => {
+  if (counter.value > 0) {
+    counter.value--;
+  }
+};
+const reset = () => (counter.value = 0);
+const add = () => {
+  arrayFavorite.value.push(counter.value);
+};
+const disabledBtn = computed(() => {
+  const numSearch = arrayFavorite.value.find((num) => num === counter.value);
+  return numSearch || numSearch === 0;
+});
+</script>
+
+<template>
+  <div class="container">
+    <h1>
+      Hi, {{ name.toUpperCase() }} -
+      <span :class="[counter <= 0 ? 'red' : 'green']">{{ counter }}</span>
+    </h1>
+    <div class="d-flex flex-row justify-content-center gap-3">
+    <button @click="increment" class="btn btn-outline-success">+</button>
+    <button @click="decrement" class="btn btn-outline-danger" :disabled="counter <= 0">-</button>
+    <button @click="reset">Reset</button>
+    <button @click="add" :disabled="disabledBtn">add</button>
+    </div>
+    <br />
+    {{ arrayFavorite }}
+  </div>
+</template>
+
+<style scoped>
+ul {
+  text-align: left;
+}
+.red {
+  color: red;
+}
+.green {
+  color: green;
+}
+</style>
+
+```
